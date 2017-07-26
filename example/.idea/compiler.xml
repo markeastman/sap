@@ -10,9 +10,8 @@
         <module name="sap" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="example" target="1.5" />
-      <module name="sap" target="1.6" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="sap" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

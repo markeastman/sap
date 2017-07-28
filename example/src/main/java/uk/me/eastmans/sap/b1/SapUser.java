@@ -3,6 +3,8 @@ package uk.me.eastmans.sap.b1;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by markeastman on 26/07/2017.
@@ -10,6 +12,7 @@ import java.io.Serializable;
 public class SapUser implements Serializable{
     private String name;
     private String passwordHash;
+    private Set<SapCompany> allowedCompanies = new HashSet<SapCompany>();
 
     public SapUser() {}
 
@@ -34,4 +37,13 @@ public class SapUser implements Serializable{
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
+    public Set<SapCompany> getAllowedCompanies() {
+        return allowedCompanies;
+    }
+
+    public void addAllowedCompany(SapCompany company) {
+        allowedCompanies.add(company);
+    }
+
 }

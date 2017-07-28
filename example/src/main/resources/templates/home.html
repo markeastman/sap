@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{layouts/layout}">
 
 <head>
@@ -40,7 +41,18 @@
     <div class="hero-unit">
         <h1>Test</h1>
         <p>
-            Welcome to the Spring Boot Thymeleaf Application! <a href="/logout">Logout</a>
+            Welcome to the Spring Boot Thymeleaf Application! <a href="/logout">Logout</a><br/>
+            You are working with active company <span sec:authentication="principal.activeCompany.name">company</span><br/>
+            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+            <form action="/changeCompany" method="post">
+                You can change the active company to any of
+                <div class="form-group blu-margin">
+                    <select class="form-control"  id="company" name="company">
+                        <option th:each="cmpy : ${#authentication.principal.sapUser.allowedCompanies}" th:value="${cmpy.name}" th:text="${cmpy.name}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Change Company</button>
+            </form>
         </p>
         <p>
             <a href="#" th:href="@{properties}" class="btn btn-large btn-success">System Properties</a>

@@ -1,7 +1,7 @@
 package uk.me.eastmans.sap.b1;
 
 public class SapRoles {
-    public static final String FEATURE_1 = "feature_1";
+    public static final String ADMIN = "ADMIN";
     public static final String FEATURE_2 = "feature_2";
     public static final String FEATURE_3 = "feature_3";
     public static final String FEATURE_4 = "feature_4";

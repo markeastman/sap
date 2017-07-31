@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<body>
+<th:block layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Diagnostics
+            <small>Spring actuator</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-cog"></i> Level</a></li>
+            <li class="active">Here</li>
+        </ol>
+    </section>
+    <section class="content container-fluid">
+
+        <p>
+            <a href="#" th:href="@{diagnostics/properties}" class="btn btn-large btn-success">System Properties</a>
+        </p>
+
+       <h1>Spring Actuator</h1>
+        <p>
+            Actuator endpoints allow you to monitor and interact with your application.
+            Spring Boot includes a number of built-in endpoints and you can also add your own.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/autoconfig}">autoconfig</a></p>
+                    </td>
+                    <td>
+                        <p>Displays an auto-configuration report showing all auto-configuration candidates and the
+                        reason why they “were” or “were not” applied.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/beans}">beans</a></p>
+                    </td>
+                    <td>
+                        <p>Displays a complete list of all the Spring Beans in your application</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/configprops}">configprops</a></p>
+                    </td>
+                    <td>
+                        <p>Displays a collated list of all <code class="literal">@ConfigurationProperties</code>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/dump}">dump</a></p>
+                    </td>
+                    <td>
+                        <p>Performs a thread dump.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/env}">env</a></p>
+                    </td>
+                    <td>
+                        <p>Exposes properties from Spring’s <code class="literal">ConfigurableEnvironment</code>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/health}">health</a></p>
+                    </td>
+                    <td>
+                        <p>Shows application health information (defaulting to a simple “OK” message).</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/info}">info</a></p>
+                    </td>
+                    <td>
+                        <p>Displays arbitrary application info.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/metrics}">metrics</a></p>
+                    </td>
+                    <td>
+                        <p>Shows “metrics” information for the current application.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/mappings}">mappings</a></p>
+                    </td>
+                    <td>
+                        <p>Displays a collated list of all <code class="literal">@RequestMapping</code> paths.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><a href="#" th:href="@{diagnostics/trace}">trace</a></p>
+                    </td>
+                    <td>
+                        <p>Displays trace information (by default the last few HTTP requests).</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</th:block>
+</body>
+</html>

@@ -18,6 +18,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String index() {
+        System.out.println("home controller is being called");
         return "home";
     }
 

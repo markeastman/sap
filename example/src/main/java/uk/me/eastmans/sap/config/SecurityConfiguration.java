@@ -9,11 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
-
+import static uk.me.eastmans.sap.b1.SapRoles.*;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -27,8 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         httpSecurity
             .authorizeRequests()
-            .antMatchers("/", "/dist/**", "/plugins/**", "/bootstrap/**", "/public/**", "/webjars/**").permitAll()
-//            .antMatchers("/users/**").hasAuthority("ADMIN")
+            .antMatchers("/", "/dist/**", "/bower_components/**").permitAll()
+            .antMatchers("/admin/**", "/diagnostics/**").hasAuthority(ADMIN)
             .anyRequest().fullyAuthenticated()
             .and()
             .formLogin()

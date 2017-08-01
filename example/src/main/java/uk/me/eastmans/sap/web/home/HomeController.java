@@ -3,6 +3,7 @@ package uk.me.eastmans.sap.web.home;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,20 +23,20 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value="/changeCompany", method = RequestMethod.POST)
-    public String changeCompany(@RequestParam String company, Authentication auth) {
+    @RequestMapping(value="/changeCompany/{newCompanyId}", method = RequestMethod.GET)
+    public String changeCompany(@PathVariable("newCompanyId") String companyId, Authentication auth) {
         if (auth.isAuthenticated())
         {
             CurrentUser user = (CurrentUser) auth.getPrincipal();
             // Ensure we are in a different company
-            if (!user.getActiveCompany().getName().equals(company))
+            if (!user.getActiveCompany().getName().equals(companyId))
             {
                 // Check to see if we have access to the company
                 SapUser sapUser = user.getSapUser();
                 Set<SapCompany> companies = sapUser.getAllowedCompanies();
                 for (SapCompany cmpy : companies)
                 {
-                    if (cmpy.getName().equals(company))
+                    if (cmpy.getId().equals(companyId))
                     {
                         // We have found the match
                         user.setActiveCompany(cmpy);
@@ -44,7 +45,6 @@ public class HomeController {
                 }
             }
         }
-        System.out.println( "Changing company to " + company );
-        return "home";
+        return "redirect:/home";
     }
 }

@@ -20,22 +20,15 @@
     <section class="content container-fluid">
 
         <p>
-            Welcome <span sec:authentication="principal.sapUser.name">user</span> to the Spring Boot Thymeleaf Application! <a href="/logout">Logout</a><br/>
-            You are working with active company <span sec:authentication="principal.activeCompany.name">xxx</span><br/>
+            Welcome <span sec:authentication="principal.sapUser.name">user</span> to the Spring Boot Thymeleaf Application!<br/>
             Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-        <form action="/changeCompany" method="post">
-            You can change the active company to any of
-            <div class="form-group blu-margin">
-                <select class="form-control"  id="company" name="company">
-                    <option th:each="cmpy : ${#authentication.principal.sapUser.allowedCompanies}" th:value="${cmpy.name}" th:text="${cmpy.name}"></option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Change Company</button>
-        </form>
         </p>
 
     </section>
 
+</th:block>
+
+<th:block layout:fragment="modals">
 </th:block>
 </body>
 </html>

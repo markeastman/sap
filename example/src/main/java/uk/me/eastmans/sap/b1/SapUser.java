@@ -5,6 +5,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Created by markeastman on 26/07/2017.
@@ -12,7 +14,7 @@ import java.util.Set;
 public class SapUser implements Serializable{
     private String name;
     private String passwordHash;
-    private Set<SapCompany> allowedCompanies = new HashSet<SapCompany>();
+    private SortedSet<SapCompany> allowedCompanies = new ConcurrentSkipListSet<>();
 
     public SapUser() {}
 

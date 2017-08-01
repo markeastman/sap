@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>AdminLTE 2 | Starter</title>
+    <title>Ascarii</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 
@@ -49,7 +49,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/home.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -65,41 +65,6 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                </ul>
-                                <!-- /.menu -->
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
-                    <!-- /.messages-menu -->
 
                     <!-- Notifications Menu -->
                     <li class="dropdown notifications-menu">
@@ -124,57 +89,18 @@
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
                     </li>
-                    <!-- Tasks Menu -->
-                    <li class="dropdown tasks-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- Inner menu: contains the tasks -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <!-- Task title and progress text -->
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <!-- The progress bar -->
-                                            <div class="progress xs">
-                                                <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            <i class="fa fa-user-circle"></i>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs" sec:authentication="principal.sapUser.name">yyy</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-
                                 <p>
                                     Alexander Pierce - Web Developer
                                     <small>Member since Nov. 2012</small>
@@ -223,12 +149,15 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                    <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="pull-left info">
-                    <p><span sec:authentication="principal.sapUser.name">yyy</span></p>
+                    <p>
+                        <span sec:authentication="principal.activeCompany.name">yyy</span>
+                        <a data-toggle="modal" data-target="#changeCompanyModal"><i class="fa fa-toggle-right"></i></a>
+                    </p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <!--a href="#"><i class="fa fa-circle text-success"></i> Online</a-->
                 </div>
             </div>
 
@@ -365,8 +294,45 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
+<div layout:fragment="modals">
+    <p>Modal Dialogs will go here...</p>
+</div>
+<div class="modal fade" id="changeCompanyModal" tabindex="-1" role="dialog" aria-labelledby="changeCompanyModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="changeCompanyModelLabel">Change Company</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <h4><i class="icon fa fa-warning"></i> Warning!</h4>
+                    Any outstanding edits will be lost when you change company.
+                </div>
+                <div class="form-group">
+                    <label>Choose a company</label>
+                    <select class="form-control" id="newCompany" name="company">
+                        <option th:each="cmpy : ${#authentication.principal.sapUser.allowedCompanies}" th:value="${cmpy.id}" th:text="${cmpy.name}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="changeCompanySave">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
+<!-- REQUIRED JS SCRIPTS -->
+<script>
+    $('#changeCompanySave').click(function() {
+        var newCompanyId  = $("#newCompany").val();
+        console.log("New company is " + newCompanyId);
+        $('#changeCompanyModal').modal('hide');
+        window.location.href = "/changeCompany/" + newCompanyId;
+    });
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

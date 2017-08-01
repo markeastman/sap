@@ -20,12 +20,12 @@ public class MockData {
         SapUser u2 = new SapUser("steve");
         users.put( u2.getName(), u2 );
 
-        u1.addAllowedCompany( new SapCompany( "Company 1", ADMIN, FEATURE_2, FEATURE_3, FEATURE_4, FEATURE_5, FEATURE_6 ) );
-        u1.addAllowedCompany( new SapCompany( "Company 2", ADMIN, FEATURE_3 ) );
-        u1.addAllowedCompany( new SapCompany( "Company 3", ADMIN, FEATURE_2, FEATURE_6 ) );
-        u1.addAllowedCompany( new SapCompany( "Company 4", ADMIN, FEATURE_2, FEATURE_4, FEATURE_5 ) );
-        u2.addAllowedCompany( new SapCompany( "Company 1", FEATURE_2, FEATURE_3 ) );
-        u2.addAllowedCompany( new SapCompany( "Company 3", FEATURE_4, FEATURE_5, FEATURE_6 ) );
+        u1.addAllowedCompany( new SapCompany( "C1","Company 1", "Long name for company 1", ADMIN, FEATURE_2, FEATURE_3, FEATURE_4, FEATURE_5, FEATURE_6 ) );
+        u1.addAllowedCompany( new SapCompany( "C2","Company 2", "Long name for company 2",ADMIN, FEATURE_3 ) );
+        u1.addAllowedCompany( new SapCompany( "C3","Company 3", "Long name for company 3",ADMIN, FEATURE_2, FEATURE_6 ) );
+        u1.addAllowedCompany( new SapCompany( "C4","Company 4", "Long name for company 4",ADMIN, FEATURE_2, FEATURE_4, FEATURE_5 ) );
+        u2.addAllowedCompany( new SapCompany( "C1","Company 1", "Long name for company 1",FEATURE_2, FEATURE_3 ) );
+        u2.addAllowedCompany( new SapCompany( "C3","Company 3", "Long name for company 3",FEATURE_4, FEATURE_5, FEATURE_6 ) );
     }
 
     public Map<String, SapUser> getUsers() {

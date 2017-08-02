@@ -9,7 +9,7 @@ import java.util.Map;
 public class IndexController {
 
     @RequestMapping("/")
-    public String index(Map<String, Object> model) {
+    public String index() {
         return "index";
     }
 

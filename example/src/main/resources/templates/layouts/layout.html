@@ -49,7 +49,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="/home.html" class="logo">
+        <a href="/dashboard.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -162,7 +162,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN MENU</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li id="menu_home"><a href="/home"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+                <li id="menu_dashboard"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li id="menu_admin"sec:authorize="hasAuthority('ADMIN')" ><a href="/admin"><i class="fa fa-cog"></i> <span>Admin</span></a></li>
                 <!--li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                 <li class="treeview">
@@ -204,52 +204,16 @@
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li class="active"><a href="#control-sidebar-authorities-tab" data-toggle="tab"><i class="fa fa-lock"></i></a></li>
             <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
+            <!-- Authorities tab content -->
+            <div class="tab-pane active" id="control-sidebar-authorities-tab">
+                <h3 class="control-sidebar-heading">Authorities</h3>
+                <label class="control-sidebar-subheading" th:each="role : ${#authentication.principal.authorities}" th:text="${role}">Role</label>
             </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
             <!-- /.tab-pane -->
             <!-- Settings tab content -->
             <div class="tab-pane" id="control-sidebar-settings-tab">

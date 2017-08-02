@@ -1,16 +1,13 @@
-package uk.me.eastmans.sap.web.diagnostics;
+package uk.me.eastmans.sap.web.admin;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Map;
 
 @Controller
 public class AdminController {
 
     @RequestMapping("/admin")
-    public String diagnostics() {
+    public String admin() {
         return "admin";
     }
 }

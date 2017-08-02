@@ -1,27 +1,18 @@
-package uk.me.eastmans.sap.web.home;
+package uk.me.eastmans.sap.web.layout;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import uk.me.eastmans.sap.b1.SapCompany;
 import uk.me.eastmans.sap.b1.SapUser;
 import uk.me.eastmans.sap.services.CurrentUser;
 
-import java.util.Map;
 import java.util.Set;
 
 @Controller
-public class HomeController {
-
-    @RequestMapping("/home")
-    public String index() {
-        System.out.println("home controller is being called");
-        return "home";
-    }
+public class LayoutController {
 
     @RequestMapping(value="/changeCompany/{newCompanyId}", method = RequestMethod.GET)
     public String changeCompany(@PathVariable("newCompanyId") String companyId, Authentication auth) {
@@ -45,6 +36,6 @@ public class HomeController {
                 }
             }
         }
-        return "redirect:/home";
+        return "redirect:/dashboard";
     }
 }

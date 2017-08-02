@@ -174,7 +174,7 @@ $(function () {
       + '</a>')
 
   // Add the tab button to the right sidebar tabs
-  $('[href="#control-sidebar-home-tab"]')
+  $('[href="#control-sidebar-dashboard-tab"]')
     .parent()
     .before($tabButton)
 
@@ -341,7 +341,7 @@ $(function () {
   $demoSettings.append($skinsList)
 
   $tabPane.append($demoSettings)
-  $('#control-sidebar-home-tab').after($tabPane)
+  $('#control-sidebar-dashboard-tab').after($tabPane)
 
   setup()
 

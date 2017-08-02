@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class SapCompany implements Serializable, Comparable {
     private String id;
     private String name;
     private String description;
-    private Set<String> roles = new HashSet<String>();
+    private SortedSet<String> roles = new ConcurrentSkipListSet<>();
 
     public SapCompany() {}
 

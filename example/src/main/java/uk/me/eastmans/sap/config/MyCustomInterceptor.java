@@ -17,14 +17,11 @@ public class MyCustomInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        System.out.println( "Intercepting " + httpServletRequest.getRequestURL());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             // We need to get some messages, events etc for this user
             if (authentication.getPrincipal() instanceof CurrentUser) {
                 CurrentUser user = (CurrentUser) authentication.getPrincipal();
-                System.out.println("Interceptor " + o + " modelAndView " + modelAndView);
-                System.out.println("  For user " + user.getSapUser().getName());
             }
         }
     }

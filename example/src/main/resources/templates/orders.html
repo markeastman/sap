@@ -26,7 +26,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -80,7 +80,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -134,7 +134,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight11" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -188,7 +188,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -242,7 +242,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -296,7 +296,7 @@
                         <input type="checkbox">
                     </div>
                     <div class="list-view-pf-actions">
-                        <button class="btn btn-default">Action</button>
+                        <button onclick="showInvoice();" class="btn btn-default">Invoice</button>
                         <div class="dropdown pull-right dropdown-kebab-pf">
                             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownKebabRight14" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="fa fa-ellipsis-v"></span>
@@ -398,6 +398,10 @@
 <th:block layout:fragment="scripts">
     <script>
         $('#menu_orders').addClass('active');
+
+        function showInvoice() {
+            window.location.href = "/invoices/23"
+        }
     </script>
 </th:block>
 

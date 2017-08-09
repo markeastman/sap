@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{layouts/layout}">
+
+<body>
+<th:block layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Invoice
+            <small>For a given ID</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="/orders"><i class="fa fa-book"></i> New Orders</a></li>
+            <li class="active">Invoice</li>
+        </ol>
+    </section>
+    <section class="content container-fluid">
+
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        </div>
+
+    </section>
+
+</th:block>
+
+<th:block layout:fragment="modals">
+</th:block>
+
+<th:block layout:fragment="scripts">
+    <!-- FastClick -->
+    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+
+    $('#menu_users').addClass('active');
+
+</th:block>
+
+</body>
+</html>

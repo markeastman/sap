@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/", "/dist/**", "/bower_components/**").permitAll()
             .antMatchers( "/admin/**").hasAuthority(ADMIN)
             .antMatchers( "/orders/**", "/invoices/**").hasAuthority(NEW_ORDERS)
+            .antMatchers( "/users/**").hasAuthority(USERS)
             .anyRequest().fullyAuthenticated()
             .and()
             .formLogin()

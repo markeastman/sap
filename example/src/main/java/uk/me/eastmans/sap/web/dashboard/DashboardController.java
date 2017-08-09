@@ -14,7 +14,7 @@ import java.util.Set;
 @Controller
 public class DashboardController {
 
-    @RequestMapping("/dashboard")
+    @RequestMapping({"/dashboard", "/home"}) // We can have multiple URIs going to the same place
     public String dashboard() {
         return "dashboard";
     }

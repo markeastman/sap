@@ -8,6 +8,8 @@ import uk.me.eastmans.sap.services.CurrentUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyCustomInterceptor implements HandlerInterceptor {
     @Override
@@ -22,6 +24,13 @@ public class MyCustomInterceptor implements HandlerInterceptor {
             // We need to get some messages, events etc for this user
             if (authentication.getPrincipal() instanceof CurrentUser) {
                 CurrentUser user = (CurrentUser) authentication.getPrincipal();
+                // Need to get the messages for this user and output them into the model
+                List<String> messages = new ArrayList<>();
+                // Add a random number of messages
+                int messageCount = (int)(Math.random() * 10);
+                for (int i = 0; i < messageCount; i++)
+                    messages.add( "Another message" );
+                modelAndView.getModel().put("userMessages", messages);
             }
         }
     }

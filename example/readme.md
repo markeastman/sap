@@ -66,7 +66,59 @@ In summary then we create a role and add it to `SapRoles` and then assign it to 
 controller via the `SecurityConfguration` and finally prevent the link appearing in the menu by adding the `hasAuthority()`
 attribute to the html menu entry.
 
+### Tracking global aspects
+When a user is logged on we can display at the top of the page the outstanding messages for him or similar. 
+We could add this processing to every controller and insert into the model the relevant code, however this is
+a little redundant and a better solution is provided by springboot.
+Using `ÌnterceptorConfig` it is possible to register code that will get executed prior to the controller being invoked or after the controller is invoked.
 
+We have 
+````java
+@Configuration
+public class InterceptorConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(new MyCustomInterceptor()).addPathPatterns(
+                "/home", "/dashboard", "/admin/**", "/orders/**", "/invoice/**", "/users/**");
+    }
+}
+````
+As we add more controllers to the application we will need to add additional entries to the pattern list.
+I have thought about adding an "/app/" prefix to all the controllers so that we can register one pattern, but in some ways that does not look right.
+
+You can see that this registers a `MyCustomInterceptor` which will checks the logged on user and get the messages for them from the `SapFacade`, however
+for now it just generates a random set of messages each time the controller changes.
+
+````java
+public class MyCustomInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            // We need to get some messages, events etc for this user
+            if (authentication.getPrincipal() instanceof CurrentUser) {
+                CurrentUser user = (CurrentUser) authentication.getPrincipal();
+                // Need to get the messages for this user and output them into the model
+                List<String> messages = new ArrayList<>();
+                // Add a random number of messages
+                int messageCount = (int)(Math.random() * 10);
+                for (int i = 0; i < messageCount; i++)
+                    messages.add( "Another message" );
+                modelAndView.getModel().put("userMessages", messages);
+            }
+        }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    }
+}
+````
 
 ## Screens so Far
 ### Dashboard

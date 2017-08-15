@@ -1,4 +1,4 @@
-package uk.me.eastmans.sap.web.index;
+package uk.me.eastmans.sap.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

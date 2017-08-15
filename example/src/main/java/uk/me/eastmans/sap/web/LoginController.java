@@ -1,4 +1,4 @@
-package uk.me.eastmans.sap.web.login;
+package uk.me.eastmans.sap.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

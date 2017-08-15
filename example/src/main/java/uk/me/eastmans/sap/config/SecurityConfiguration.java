@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +15,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.servlet.http.HttpServletRequest;
-import static uk.me.eastmans.sap.b1.SapRoles.*;
-
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -30,9 +29,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
             .authorizeRequests()
             .antMatchers("/", "/dist/**", "/bower_components/**").permitAll()
-            .antMatchers( "/admin/**").hasAuthority(ADMIN)
-            .antMatchers( "/orders/**", "/invoices/**").hasAuthority(NEW_ORDERS)
-            .antMatchers( "/users/**").hasAuthority(USERS)
             .anyRequest().fullyAuthenticated()
             .and()
             .formLogin()

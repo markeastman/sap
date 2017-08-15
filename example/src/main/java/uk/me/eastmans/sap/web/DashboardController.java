@@ -1,4 +1,4 @@
-package uk.me.eastmans.sap.web.dashboard;
+package uk.me.eastmans.sap.web;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

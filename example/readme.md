@@ -22,13 +22,12 @@ In addition we have used [adminlte.io](http://adminlte.io) theme to provide a lo
 
 ## Security
 
-We have used spring security along with user roles to provent access to certain features of the application.
+We have used spring security along with user roles to prevent access to certain features of the application.
 The `SapRoles` object holds a definition of all the features that we are allowing within the system.
 Each feature is governed by a role that matches it and also a menu item that provides access to it. 
-So for menu item XXX we have a role called XXX and we display the menu item
+So for logical menu item XXX we have a role called ROLE_XXX and we display the menu item
 to the user if they have that role. 
-In addition we have to prevent the controllers from accessing that feature if the user has not got it and they just enter the URL for a
-known feature that they do not have. In this case we add a `antmatchers` row to the `httpsecurity` object. 
+In addition we want to secure the controller for the URLs that match that feature. We use `@Secured` to manage access to the controller functions.
 Note also that for a given user the roles are also based upon which company they have active.
 The user can switch their active company after they have logged into the system.
 
@@ -41,29 +40,14 @@ menu role the user gets the menu and also an associated additional capability.
 
 ### Adding a new controller with security
 
-If we start by looking at the `OrdersController` and the `InvoiceController` we want to secure access to the list of new orders and the invoice viewer using the
-same security role. In the case we have created a `SapRoles.NEW_ORDERS` and have added it to a number of users within `MockData.
-
-To protect the controller for the URL we add to the `httpSecurity` object within `SecurityConfiguration` a set of url patterns and an authority role string such as:
-
-```
-   @Override
-   protected void configure(HttpSecurity httpSecurity) throws Exception {
-
-        httpSecurity
-            ...
-            .antMatchers( "/orders/**", "/invoices/**").hasAuthority(NEW_ORDERS)
-            ...
-```
-
 Within `layout.html` we have the menu option for the features so we protect the menu item with:
 
 ```html
-<li id="menu_orders" sec:authorize="hasAuthority('NEW_ORDERS')" ><a href="/orders"><i class="fa fa-cart-arrow-down"></i> <span>New Orders</span></a></li>
+<li id="menu_orders" sec:authorize="hasRole('ROLE_ORDERS')" ><a href="/orders"><i class="fa fa-cart-arrow-down"></i> <span>New Orders</span></a></li>
 ```
 
 In summary then we create a role and add it to `SapRoles` and then assign it to users. We protect the
-controller via the `SecurityConfguration` and finally prevent the link appearing in the menu by adding the `hasAuthority()`
+controller via the `@Secured("ROLE_ORDERS")` annotation and finally prevent the link appearing in the menu by adding the `hasRole()`
 attribute to the html menu entry.
 
 ### Tracking global aspects

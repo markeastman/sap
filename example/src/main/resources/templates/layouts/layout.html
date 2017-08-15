@@ -167,9 +167,9 @@
                 <li class="header">MAIN MENU</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li id="menu_dashboard"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li id="menu_admin" sec:authorize="hasAuthority('ADMIN')" ><a href="/admin"><i class="fa fa-cog"></i> <span>Admin</span></a></li>
-                <li id="menu_orders" sec:authorize="hasAuthority('NEW_ORDERS')" ><a href="/orders"><i class="fa fa-cart-arrow-down"></i> <span>New Orders</span></a></li>
-                <li id="menu_users" sec:authorize="hasAuthority('USERS')" ><a href="/users/23"><i class="fa fa-user"></i> <span>User Profile</span></a></li>
+                <li id="menu_admin" sec:authorize="hasRole('ROLE_ADMIN')" ><a href="/admin"><i class="fa fa-cog"></i> <span>Admin</span></a></li>
+                <li id="menu_orders" sec:authorize="hasRole('ROLE_ORDERS')" ><a href="/orders"><i class="fa fa-cart-arrow-down"></i> <span>New Orders</span></a></li>
+                <li id="menu_users" sec:authorize="hasRole('ROLE_USERS')" ><a href="/users/23"><i class="fa fa-user"></i> <span>User Profile</span></a></li>
                 <!--li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>

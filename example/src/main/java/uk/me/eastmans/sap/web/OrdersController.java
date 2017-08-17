@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class OrdersController {
 
-    @Secured("ROLE_ORDERS")
+    @Secured({"ROLE_ORDERS"})
     @RequestMapping("/orders")
     public String index() {
         return "orders";

@@ -1,8 +1,7 @@
-package uk.me.eastmans.sap.services;
+package uk.me.eastmans.sap.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import uk.me.eastmans.sap.b1.SapCompany;
 import uk.me.eastmans.sap.b1.SapUser;
 

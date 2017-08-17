@@ -20,7 +20,7 @@ public class MockData {
         SapUser u2 = new SapUser("steve");
         users.put( u2.getName(), u2 );
 
-        u1.addAllowedCompany( new SapCompany( "C1","Company 1", "Long name for company 1",ADMIN, NEW_ORDERS, USERS, FEATURE_4, FEATURE_5, FEATURE_6 ) );
+        u1.addAllowedCompany( new SapCompany( "C1","Company 1", "Long name for company 1", "ROLE_USERS", "ROLE_ROLE_USERS", ADMIN, NEW_ORDERS, USERS, FEATURE_4, FEATURE_5, FEATURE_6 ) );
         u1.addAllowedCompany( new SapCompany( "C2","Company 2", "Long name for company 2",ADMIN, USERS) );
         u1.addAllowedCompany( new SapCompany( "C3","Company 3", "Long name for company 3",ADMIN, NEW_ORDERS, FEATURE_6 ) );
         u1.addAllowedCompany( new SapCompany( "C4","Company 4", "Long name for company 4",ADMIN, NEW_ORDERS, FEATURE_4, FEATURE_5 ) );

@@ -22,6 +22,36 @@ In addition we have used [adminlte.io](http://adminlte.io) theme to provide a lo
 
 ## Security
 
+### Authentication
+
+For this system we will want to provide a custom authentication mechanism to `spring` as we 
+will need to authenticate a user against the backend Sap B1 system.
+
+Within `SecurityConfiguration` we register a custom authentication provider with a class of `SapAuthenticationProvider` as per:
+
+````
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider);
+    }
+````
+Part of the authentication process is the use of a user token, in psring for a standard user password basic authication mechanism
+the `UserPasswordAuthenticationToken` is used to pass the user id and credentials. Within our provider we need to 
+indicate to the authentication process that we can process this token and provide authentication. However we want to 
+handle a different token once logged in so we extend the `UserPasswordAuthenticationToken` by a class called `SapAuthenticationToken`.
+`SapAuthenticationToken`. The reason for having our own is to handle the case when the user changes their company
+which in turn may change the set of roles they have. For normal `spring` the set of roles for a user does not normally change 
+over the period of the login.
+
+Within the `SapAuthenticationProvider` we get the initial `UserPasswordAuthenticationToken` and check to see if the 
+user is already authenticated. For a normal logon process this will be false, so we go through the 
+`SapFacade` to authenticate against the backend. Upon success we then create a new `SapAuthenticationToken`
+with the details from the logged on user. At times we have found that the system can check the authentication object again
+however this time it will be the   `SapAuthenticationToken` that is passed in and it will have the authenticated property set to true.
+In this scenario we just return the existing token.
+
+### Authorization
+
 We have used spring security along with user roles to prevent access to certain features of the application.
 The `SapRoles` object holds a definition of all the features that we are allowing within the system.
 Each feature is governed by a role that matches it and also a menu item that provides access to it. 
@@ -38,7 +68,7 @@ have different roles per companies.
 For some entities such as invoice, we have overloaded the use of another role that matches a menu role. So for that 
 menu role the user gets the menu and also an associated additional capability.
 
-### Adding a new controller with security
+#### Adding a new controller with security
 
 Within `layout.html` we have the menu option for the features so we protect the menu item with:
 
@@ -54,7 +84,8 @@ attribute to the html menu entry.
 When a user is logged on we can display at the top of the page the outstanding messages for him or similar. 
 We could add this processing to every controller and insert into the model the relevant code, however this is
 a little redundant and a better solution is provided by springboot.
-Using `ÌnterceptorConfig` it is possible to register code that will get executed prior to the controller being invoked or after the controller is invoked.
+Using `ÌnterceptorConfig` it is possible to register code that will get executed prior to the controller 
+being invoked or after the controller is invoked.
 
 We have 
 ````java
@@ -62,7 +93,7 @@ We have
 public class InterceptorConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(new MyCustomInterceptor()).addPathPatterns(
+        registry.addInterceptor(new UserNotificationInterceptor()).addPathPatterns(
                 "/home", "/dashboard", "/admin/**", "/orders/**", "/invoice/**", "/users/**");
     }
 }
@@ -70,11 +101,11 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 As we add more controllers to the application we will need to add additional entries to the pattern list.
 I have thought about adding an "/app/" prefix to all the controllers so that we can register one pattern, but in some ways that does not look right.
 
-You can see that this registers a `MyCustomInterceptor` which will checks the logged on user and get the messages for them from the `SapFacade`, however
-for now it just generates a random set of messages each time the controller changes.
+You can see that this registers a `UserNotificationInterceptor` which will checks the logged on user and get the messages for them from the `SapFacade`, 
+however for now it just generates a random set of messages each time the controller changes.
 
 ````java
-public class MyCustomInterceptor implements HandlerInterceptor {
+public class UserNotificationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         return true;

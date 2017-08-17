@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uk.me.eastmans.sap.b1.SapCompany;
 import uk.me.eastmans.sap.b1.SapUser;
-import uk.me.eastmans.sap.services.CurrentUser;
+import uk.me.eastmans.sap.security.CurrentUser;
 
 import java.util.Set;
 

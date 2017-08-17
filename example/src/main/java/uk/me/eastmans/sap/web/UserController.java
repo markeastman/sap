@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 
-    @Secured("ROLE_USERS")
+    @Secured({"ROLE_USERS"})
     @RequestMapping("/users/{id}")
     public String userProfile(@PathVariable("id") String id) {
         return "user";

@@ -47,11 +47,14 @@
         <b>Ascarii Login</b>
     </div>
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div th:if="${changePassword}">
+        <p>Need to do change password dialog</p>
+    </div>
+    <div th:if="${changePassword == null}" class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <div th:if="${error.present}">
-            <p>The id or password you have entered is invalid, try again.</p>
+        <div th:if="${failure.present}">
+            <p th:text="${failureReason}">The id or password you have entered is invalid, try again.</p>
         </div>
 
         <form role="form" action="/login" method="post">

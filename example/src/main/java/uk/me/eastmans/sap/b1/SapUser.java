@@ -15,12 +15,20 @@ public class SapUser implements Serializable{
     private String name;
     private String passwordHash;
     private SortedSet<SapCompany> allowedCompanies = new ConcurrentSkipListSet<>();
+    private boolean enabled;
+    private boolean accountNonExpired;
+    private boolean credentialsNonExpired;
+    private boolean accountNonLocked;
 
     public SapUser() {}
 
-    public SapUser( String name )
+    public SapUser( String name, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked )
     {
         this.name = name;
+        this.enabled =  enabled;
+        this.accountNonExpired = accountNonExpired;
+        this.credentialsNonExpired = credentialsNonExpired;
+        this.accountNonLocked = accountNonLocked;
         this.passwordHash = new BCryptPasswordEncoder().encode(name);
     }
 
@@ -34,6 +42,22 @@ public class SapUser implements Serializable{
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setPasswordHash(String passwordHash) {

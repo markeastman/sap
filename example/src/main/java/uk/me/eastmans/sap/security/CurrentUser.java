@@ -14,7 +14,7 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     private Collection<GrantedAuthority> ourAuthorities;
 
     public CurrentUser(SapUser user) {
-        super(user.getName(), user.getPasswordHash(),
+        super(user.getName(), user.getPasswordHash(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(),
                 AuthorityUtils.createAuthorityList(((SapCompany)user.getAllowedCompanies().toArray()[0]).getRoles().toArray( new String[0])));
         this.user = user;
         this.ourAuthorities = super.getAuthorities();

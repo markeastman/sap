@@ -1,8 +1,7 @@
 package uk.me.eastmans.sap.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
@@ -11,6 +10,8 @@ import uk.me.eastmans.sap.b1.SapFacade;
 import uk.me.eastmans.sap.b1.SapUser;
 import uk.me.eastmans.sap.b1.SapUserCredentials;
 import uk.me.eastmans.sap.security.CurrentUser;
+
+import javax.security.auth.login.CredentialExpiredException;
 
 @Component
 public class SapAuthenticationProvider implements AuthenticationProvider {
@@ -21,7 +22,6 @@ public class SapAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
 
-        System.out.println( "Checking authentication " + authentication);
         if (authentication.isAuthenticated())
         {
             // We do not need to do anything except check if he has been expired etc.
@@ -41,10 +41,18 @@ public class SapAuthenticationProvider implements AuthenticationProvider {
             try {
                 SapUser sapUser = b1.authenticate(credentials);
                 CurrentUser user = new CurrentUser(sapUser);
-                return new SapAuthenticationToken( user, password );
-                // Perhaps handle the attempt better, by flagging errors etc.
+                SapAuthenticationToken token = new SapAuthenticationToken( user, password );
+                if (!user.isEnabled())
+                    throw new DisabledException("Account is disabled");
+                if (!user.isCredentialsNonExpired())
+                    throw new CredentialsExpiredException("Credentials have expired");
+                if (!user.isAccountNonExpired())
+                    throw new AccountExpiredException("Account has expired");
+                if (!user.isAccountNonLocked())
+                    throw new LockedException("Account is Locked");
+                return token;
             } catch (InvalidUserCredentials iuc) {
-                return null;
+                throw new BadCredentialsException("The id or password you have entered is invalid, try again.");
             }
         }
     }

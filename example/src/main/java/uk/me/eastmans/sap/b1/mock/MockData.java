@@ -15,9 +15,9 @@ public class MockData {
 
     public MockData() {
         // Create some users
-        SapUser u1 = new SapUser("admin");
+        SapUser u1 = new SapUser("admin", true, true, true, true);
         users.put( u1.getName(), u1 );
-        SapUser u2 = new SapUser("steve");
+        SapUser u2 = new SapUser("steve", true, true, false, true);
         users.put( u2.getName(), u2 );
 
         u1.addAllowedCompany( new SapCompany( "C1","Company 1", "Long name for company 1", "ROLE_USERS", "ROLE_ROLE_USERS", ADMIN, NEW_ORDERS, USERS, FEATURE_4, FEATURE_5, FEATURE_6 ) );

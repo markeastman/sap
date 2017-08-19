@@ -41,7 +41,6 @@ public class SapAuthenticationProvider implements AuthenticationProvider {
             try {
                 SapUser sapUser = b1.authenticate(credentials);
                 CurrentUser user = new CurrentUser(sapUser);
-                SapAuthenticationToken token = new SapAuthenticationToken( user, password );
                 if (!user.isEnabled())
                     throw new DisabledException("Account is disabled");
                 if (!user.isCredentialsNonExpired())
@@ -50,7 +49,7 @@ public class SapAuthenticationProvider implements AuthenticationProvider {
                     throw new AccountExpiredException("Account has expired");
                 if (!user.isAccountNonLocked())
                     throw new LockedException("Account is Locked");
-                return token;
+                return new SapAuthenticationToken( user, password );
             } catch (InvalidUserCredentials iuc) {
                 throw new BadCredentialsException("The id or password you have entered is invalid, try again.");
             }

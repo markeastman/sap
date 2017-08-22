@@ -50,6 +50,19 @@ with the details from the logged on user. At times we have found that the system
 however this time it will be the   `SapAuthenticationToken` that is passed in and it will have the authenticated property set to true.
 In this scenario we just return the existing token.
 
+We have trapped the following authentication aspects: disabled account, locked out account, 
+expired account, credentials have expired and need refreshing. For the first three we return the user to the login page again
+with a message which they will need to phone up and get sorted I guess. For the last aspect we 
+have trapped this and sent the user back to the login page but witha flag indicating they need changing. 
+I have written a different form within the same server page for this situation.
+
+````html
+<div th:if="${changePassword}">
+    <p>Need to do change password dialog</p>
+</div>
+<div th:if="${changePassword == null}" class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+````
 ### Authorization
 
 We have used spring security along with user roles to prevent access to certain features of the application.

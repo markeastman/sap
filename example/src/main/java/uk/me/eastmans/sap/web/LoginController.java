@@ -30,4 +30,16 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String doRegistration()
+    {
+        // Process the form and register this person as a user.
+        return "register";
+    }
+
 }
